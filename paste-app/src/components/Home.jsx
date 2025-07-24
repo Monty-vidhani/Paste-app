@@ -55,9 +55,9 @@ function createPaste(){
 
 
   return (
-   <div>
-     <div className='flex flex-row gap-7 place-content-between'>
-        <input className='p-2 rounded-2xl mt-2 w-[50%] pl-4' type="text" placeholder='Enter Title Here'
+   <div className='w-full p-2 flex flex-col items-center'>
+     <div className='flex flex-row gap-7 w-[80%] justify-between'>
+        <input className='p-2 rounded-2xl mt-2 w-[70%] border-1 pl-4' type="text" placeholder='Enter Title Here'
             value={title}
             onChange={(e)=>setTitle(e.target.value)} 
             
@@ -67,10 +67,10 @@ function createPaste(){
                 pasteId ? "Update My Paste" : "Create My Paste"
 }</button>
     </div>
-    <div className='mt-8'>
+    <div className='mt-8 w-[80%]'>
         <textarea value={value} placeholder='enter content here'  
         onChange={(e)=>setValue(e.target.value)} rows={20}
-        className='rounded-2xl min-w-[500px] p-4'
+        className='rounded-2xl w-full border-1 p-4'
          
         ></textarea>
     </div>

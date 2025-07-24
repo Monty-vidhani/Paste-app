@@ -4,6 +4,7 @@ import NavBar from './components/NavBar'
 import Home from './components/home'
 import Paste from './components/Paste'
 import ViewPaste from './components/ViewPaste'
+import {NavLink} from 'react-router-dom' ;
 
 const router = createBrowserRouter(
   [
