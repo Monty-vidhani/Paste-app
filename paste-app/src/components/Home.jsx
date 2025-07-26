@@ -29,6 +29,7 @@ if(pasteId){
 
 
 function createPaste(){
+    
     if(title === ""){
         toast.error("Please Enter Title") ;
         return ;
@@ -55,22 +56,25 @@ function createPaste(){
 
 
   return (
-   <div className='w-full p-2 flex flex-col items-center'>
-     <div className='flex flex-row gap-7 w-[80%] justify-between'>
-        <input className='p-2 rounded-2xl mt-2 w-[70%] border-1 pl-4' type="text" placeholder='Enter Title Here'
+   <div className='w-full mt-7 flex flex-col items-center'>
+     <div className='flex flex-row gap-7 w-[50%] justify-between items-center '>
+        <input className='p-2 input w-[70%] border-2 pl-4 ' type="text" placeholder='Enter Title Here'
             value={title}
             onChange={(e)=>setTitle(e.target.value)} 
             
         />
-        <button className='p-2 rounded-2xl mt-2' onClick={createPaste}>{
+      
+        <div className="box-button">
+        <div className="button" onClick={createPaste}><span>{
 
                 pasteId ? "Update My Paste" : "Create My Paste"
-}</button>
+}</span></div>
+      </div>
     </div>
-    <div className='mt-8 w-[80%]'>
+    <div className='mt-8 w-[50%]'>
         <textarea value={value} placeholder='enter content here'  
         onChange={(e)=>setValue(e.target.value)} rows={20}
-        className='rounded-2xl w-full border-1 p-4'
+        className=' w-full p-4 card '
          
         ></textarea>
     </div>
