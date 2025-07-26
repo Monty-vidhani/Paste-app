@@ -15,7 +15,7 @@ const Paste = () => {
 function handleDelete(pasteId){
   dispatch(removeFromPastes(pasteId)) ;
 }
-function deleteALL(pastes){
+function deleteAll(pastes){
   dispatch(resetAllPastes(pastes));
 }
 
@@ -24,23 +24,24 @@ function deleteALL(pastes){
 
 
   return (
-    <div className='w-full p-2 flex flex-col items-center'>
-      <div className='flex flex-row justify-between w-[80%]'>
-        <input className='p-2 rounded-2xl mt-2 w-[50%] border-1 pl-4' 
+    <div className='w-full mt-7 flex flex-col items-center'>
+      <div className='flex flex-row gap-7 justify-between w-[50%]'>
+        <input className='input w-[70%] border-1 px-4' 
        type="search" 
         placeholder='Search here'
         value={searchTerm}
         onChange={(e)=>setSearchTerm(e.target.value)}
         />
-        <button className='p-2 rounded-2xl mt-2' onClick={deleteALL}>Delete All</button>
+        <div className="box-button">
+        <div className="button" onClick={deleteAll}><span>Delete All</span></div></div>
       </div>
-      <div className='flex w-[80%] items-center flex-col gap-5 mt-5'>
+      <div className='flex w-[50%] items-center  flex-col gap-5 mt-5'>
         {
           filterData.length > 0 && 
           filterData.map(
             (paste)=>{
               return (
-                <div className='border w-full rounded-2xl p-5 flex flex-col  gap-4' key={paste?._id}>
+                <div className='border w-full  p-5 view flex flex-col  gap-4' key={paste?._id}>
                   <div>{paste.title}</div>
                   <div className='overflow-hidden'>{paste.content}</div>
                   <div className='flex flex-row gap-4 place-content-evenly'>
