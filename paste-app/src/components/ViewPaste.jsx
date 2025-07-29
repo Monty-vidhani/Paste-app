@@ -16,7 +16,7 @@ const paste = allPastes.filter((p)=>p._id === id)[0] ;
 
 
   return (
-   <div className='w-full p-2 flex flex-col items-center'>
+   <div className='w-full p-5 mt-3 flex flex-col items-center'>
      <div className='flex flex-row gap-7 justify-between items-center w-[50%]'>
         <h1         
         >{[paste.title]}</h1>

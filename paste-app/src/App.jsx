@@ -1,7 +1,7 @@
 import './App.css'
 import {createBrowserRouter, RouterProvider} from "react-router"
 import NavBar from './components/NavBar'
-import Home from './components/home'
+import Home from './components/Home'
 import Paste from './components/Paste'
 import ViewPaste from './components/ViewPaste'
 import {NavLink} from 'react-router-dom' ;

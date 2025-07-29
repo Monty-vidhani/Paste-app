@@ -56,7 +56,7 @@ function createPaste(){
 
 
   return (
-   <div className='w-full mt-7 flex flex-col items-center'>
+   <div className='w-full p-5 mt-3 flex flex-col items-center'>
      <div className='flex flex-row gap-7 w-[50%] justify-between items-center '>
         <input className='p-2 input w-[70%] border-2 pl-4 ' type="text" placeholder='Enter Title Here'
             value={title}
