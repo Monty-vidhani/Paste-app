@@ -1,73 +1,90 @@
-import React, { useState } from 'react'
-import {useSelector,useDispatch  } from "react-redux";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import { removeFromPastes, resetAllPastes } from '../redux/pasteSlice';
 import toast from 'react-hot-toast';
-import { Link} from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import { format } from "date-fns";
+import { Copy, Trash2,Pencil,Share2,Eye } from "lucide-react";
 
 
 const Paste = () => {
-  const pastes = useSelector((state)=> state.paste.pastes) ;
-  const[searchTerm,setSearchTerm] = useState('') ;
-  const dispatch = useDispatch() ;
-  const filterData = pastes.filter((paste)=> paste.title.toLowerCase().includes(searchTerm.toLowerCase())) ; 
+  const pastes = useSelector((state) => state.paste.pastes);
+  const [searchTerm, setSearchTerm] = useState('');
+  const dispatch = useDispatch();
+  
 
-function handleDelete(pasteId){
-  dispatch(removeFromPastes(pasteId)) ;
-}
-function deleteAll(pastes){
-  dispatch(resetAllPastes(pastes));
-}
+  const filterData = pastes.filter((paste) =>
+    paste.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-
-
-
+  function handleDelete(pasteId) {
+    dispatch(removeFromPastes(pasteId));
+  }
+  function deleteAll() {
+    dispatch(resetAllPastes());
+  }
 
   return (
-    <div className='w-full p-5 mt-3 flex flex-col items-center'>
-      <div className='flex flex-row gap-7 justify-between w-[50%]'>
-        <input className='input w-[70%] border-1 px-4' 
-       type="search" 
-        placeholder='Search here'
-        value={searchTerm}
-        onChange={(e)=>setSearchTerm(e.target.value)}
+    <div className="w-full p-5 flex flex-col items-center">
+      {/* 🔍 Search + Delete All */}
+      <div className="flex flex-col sm:flex-row gap-4 sm:gap-7 w-full max-w-4xl justify-between items-center">
+        <input
+          className="p-2 input w-full sm:w-[70%] border-2 pl-4"
+          type="search"
+          placeholder="Search here"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <div className="box-button">
-        <div className="button" onClick={deleteAll}><span>Delete All</span></div></div>
-      </div>
-      <div className='flex w-[50%]  items-center flex-col gap-5 mt-5'>
-        {
-          filterData.length > 0 && 
-          filterData.map(
-            (paste)=>{
-              return (
-                <div className='border w-full h-[14rem] p-2 justify-evenly view flex flex-col  gap-4' key={paste?._id}>
-                  <div className='h-1/10'>{paste.title}</div>
-                  <div className='overflow-hidden h-4/10 p-3'>{paste.content}</div>
-                  <div className='flex flex-row gap-4 place-content-evenly'>
-                    <button>
-                      <Link to={`/?pasteId=${paste?._id}`}>Edit</Link>
-                    </button>
-                    <button>
-                      <Link to={`/pastes/${paste?._id}`}>View</Link>
-                    </button>
-                    <button onClick={() => handleDelete(paste?._id)}>Delete</button>
-                    <button onClick={()=>{
-                      navigator.clipboard.writeText(paste?.content)
-                      toast.success("Paste Copied") ;
-                      }}>Copy</button>
-                    <button>Share</button>
-                  </div>
-                  <div>{paste.createdAt}</div>
-                  </div>
-              )
-            }
-          )
-        }
-      </div>
 
+        <div className="box-button !w-full sm:!w-[20%] text-center">
+          <div className="button w-full sm:w-full text-center font-semibold" onClick={deleteAll}>
+            <span>Delete All</span>
+          </div>
+        </div>
+      </div>
+    
+      {/* 📝 Pastes List */}
+      <div className="flex w-full max-w-4xl items-center flex-col gap-5 mt-5">
+        
+        {filterData.length > 0 &&
+          filterData.map((paste) => {
+            return (
+              <div
+                className="border w-full p-3 view flex flex-col gap-4 "
+                key={paste?._id}
+              >
+                <div className="font-semibold">{paste.title}</div>
+
+                <div className="overflow-hidden p-2 max-h-24">
+                  {paste.content}
+                </div>
+
+                <div className="flex flex-wrap gap-3 justify-evenly">
+                  <button>
+                    <Link to={`/?pasteId=${paste?._id}`}><Pencil/></Link>
+                  </button>
+                  <button>
+                    <Link to={`/pastes/${paste?._id}`}><Eye/></Link>
+                  </button>
+                  <button onClick={() => handleDelete(paste?._id)}><Trash2/></button>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(paste?.content);
+                      toast.success("Paste Copied");
+                    }}
+                  >
+                    <Copy/>
+                  </button>
+                  {/* <button><Share2/></button> */}
+                </div>
+
+                <div className="text-sm text-gray-500">{format(new Date(paste.createdAt), "dd, MMM EEE h:mm a")}</div>
+              </div>
+            );
+          })}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Paste
+export default Paste;
