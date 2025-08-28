@@ -12,9 +12,9 @@ const NavBar = () => {
         <NavLink to="/pastes">Pastes</NavLink>
       </div>
     <label className="switch w-[10%]">
-        <input className="toggle" type="checkbox" />
+{/*         <input className="toggle" type="checkbox" />
         <span className="slider" />
-        <span className="card-side" />
+        <span className="card-side" /> */}
       </label>
     </div>
  
